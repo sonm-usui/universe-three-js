@@ -1,0 +1,19 @@
+{
+  "name": "three-js",
+  "version": "1.0.0",
+  "description": "test three js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "usui",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "dat": "^14.0.3",
+    "dat.gui": "^0.7.9",
+    "three": "^0.149.0"
+  }
+}
