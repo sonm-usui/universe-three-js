@@ -39479,6 +39479,10 @@ exports.default = _default;
 module.exports = "/nebula.aa5f5ed0.jpg";
 },{}],"../assets/star.jpg":[function(require,module,exports) {
 module.exports = "/star.86f65ee6.jpg";
+},{}],"../assets/bg.jpeg":[function(require,module,exports) {
+module.exports = "/bg.2b04996d.jpeg";
+},{}],"../assets/sky.jpeg":[function(require,module,exports) {
+module.exports = "/sky.c763a4ea.jpeg";
 },{}],"JS/script.js":[function(require,module,exports) {
 "use strict";
 
@@ -39487,6 +39491,8 @@ var _OrbitControls = require("three/examples/jsm/controls/OrbitControls");
 var dat = _interopRequireWildcard(require("dat.gui"));
 var _nebula = _interopRequireDefault(require("../../assets/nebula.jpg"));
 var _star = _interopRequireDefault(require("../../assets/star.jpg"));
+var _bg = _interopRequireDefault(require("../../assets/bg.jpeg"));
+var _sky = _interopRequireDefault(require("../../assets/sky.jpeg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -39503,7 +39509,7 @@ var scene = new THREE.Scene();
 
 //add texture
 var textureLoader = new THREE.TextureLoader();
-scene.background = textureLoader.load(_star.default);
+scene.background = textureLoader.load(_sky.default);
 var cubeTextureLoader = new THREE.CubeTextureLoader();
 // scene.background = cubeTextureLoader.load([
 //     nebula,
@@ -39514,21 +39520,33 @@ var cubeTextureLoader = new THREE.CubeTextureLoader();
 //     star
 // ])
 
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
+var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 1000);
 //orbit is used to move the camera of axes using mouse
 var orbit = new _OrbitControls.OrbitControls(camera, renderer.domElement);
-
+orbit.enableRotate = false;
+orbit.enableZoom = true;
+orbit.enablePan = false;
+orbit.screenSpacePanning = true;
+orbit.minDistance = 12;
+orbit.maxDistance = 32;
+orbit.target.set(0, 0, 0);
+orbit.update();
 //Helper for x, y and z axes
 var axesHelper = new THREE.AxesHelper(2);
 
 //adding axeshelper in scene
-scene.add(axesHelper);
-var gridHelper = new THREE.GridHelper(30);
-scene.add(gridHelper);
-//setting the position of camera
-camera.position.set(0, 5, 20);
+// scene.add(axesHelper);
 
+var gridHelper = new THREE.GridHelper(30);
+// scene.add(gridHelper);
+//setting the position of camera
+camera.position.set(0, 10, 10);
+// Set the camera position
+// camera.position.set(0, 300, 0);
+
+// Set the camera rotation
+camera.position.y = 10;
+camera.rotation.z = 90;
 //updating the camera every time the mouse is moved
 orbit.update();
 
@@ -39539,38 +39557,95 @@ var boxMaterial = new THREE.MeshStandardMaterial({
 });
 var box = new THREE.Mesh(boxGeometry, boxMaterial);
 //Adding the object to the scene
-scene.add(box);
+// scene.add(box);
 box.position.y = 7;
 
 //Plane object
 var planeGeometry = new THREE.PlaneGeometry(30, 30);
-var planeMaterial = new THREE.MeshStandardMaterial({
+var planeMaterial = new THREE.MeshLambertMaterial({
   color: "white",
   //Plane from downside is not there so to add it, we add THREE.DoubleSide
-  side: THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/5.jpg')
 });
 var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+// plane.position.set(-30, 0, 0);
 scene.add(plane);
+var planeGeometry2 = new THREE.PlaneGeometry(30, 30);
+var planeMaterial2 = new THREE.MeshLambertMaterial({
+  color: "white",
+  //Plane from downside is not there so to add it, we add THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/6.jpg')
+});
+var plane2 = new THREE.Mesh(planeGeometry2, planeMaterial2);
+plane2.position.set(30, 0, 0);
+scene.add(plane2);
+var planeGeometry3 = new THREE.PlaneGeometry(30, 30);
+var planeMaterial3 = new THREE.MeshLambertMaterial({
+  color: "white",
+  //Plane from downside is not there so to add it, we add THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/4.jpg')
+});
+var plane3 = new THREE.Mesh(planeGeometry3, planeMaterial3);
+plane3.position.set(-30, 0, 0);
+scene.add(plane3);
+var planeGeometry4 = new THREE.PlaneGeometry(30, 30);
+var planeMaterial4 = new THREE.MeshLambertMaterial({
+  color: "white",
+  //Plane from downside is not there so to add it, we add THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/2.jpg')
+});
+var plane4 = new THREE.Mesh(planeGeometry4, planeMaterial4);
+plane4.position.set(0, 0, -30);
+scene.add(plane4);
+var planeGeometry5 = new THREE.PlaneGeometry(30, 30);
+var planeMaterial5 = new THREE.MeshLambertMaterial({
+  color: "white",
+  //Plane from downside is not there so to add it, we add THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/1.jpg')
+});
+var plane5 = new THREE.Mesh(planeGeometry5, planeMaterial5);
+plane5.position.set(-30, 0, -30);
+scene.add(plane5);
+var planeGeometry6 = new THREE.PlaneGeometry(30, 30);
+var planeMaterial6 = new THREE.MeshLambertMaterial({
+  color: "white",
+  //Plane from downside is not there so to add it, we add THREE.DoubleSide
+  side: THREE.DoubleSide,
+  map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/3.jpg')
+});
+var plane6 = new THREE.Mesh(planeGeometry6, planeMaterial6);
+plane6.position.set(30, 0, -30);
+scene.add(plane6);
 
 //SPHERE object
-
 var sphereGeometry = new THREE.SphereGeometry(4, 50, 50);
 var sphereMaterial = new THREE.MeshStandardMaterial({
   color: 'blue',
   wireframe: false
 });
 var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-scene.add(sphere);
+// scene.add(sphere);
+
 sphere.position.set(-10, 4, 0);
 //Rotate the plane to grid alignment
 plane.rotation.x = -0.5 * Math.PI;
+plane2.rotation.x = -0.5 * Math.PI;
+plane3.rotation.x = -0.5 * Math.PI;
+plane4.rotation.x = -0.5 * Math.PI;
+plane5.rotation.x = -0.5 * Math.PI;
+plane6.rotation.x = -0.5 * Math.PI;
 var ambientLight = new THREE.AmbientLight(0x333333);
 scene.add(ambientLight);
 var directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8);
 scene.add(directionalLight);
 directionalLight.position.set(-30, 50, 0);
 var dLightHelper = new THREE.DirectionalLightHelper(directionalLight);
-scene.add(dLightHelper);
+// scene.add(dLightHelper);
 //For customization and debugging we use dat.gui
 var gui = new dat.GUI();
 var option = {
@@ -39579,23 +39654,29 @@ var option = {
   speed: 0.01,
   rotation: 10
 };
-var shape = [{
-  name: 'sphere',
-  color: 'sphereColor'
-}, {
-  name: 'box',
-  color: 'cubeColor'
-}];
 
-//Dynamically addition of color for the objects
-gui.addColor(option, 'sphereColor').onChange(function (e) {
-  sphere.material.color.set(e);
-});
-gui.addColor(option, 'cubeColor').onChange(function (e) {
-  box.material.color.set(e);
-});
-gui.add(option, 'speed', 0, 0.1);
-gui.add(option, 'rotation', 10, 1000);
+// const shape = [{
+//     name: 'sphere',
+//     color: 'sphereColor'
+// },
+// {
+//     name: 'box',
+//     color: 'cubeColor'
+// }];
+
+// //Dynamically addition of color for the objects
+// gui.addColor(option, 'sphereColor').onChange( (e) => {
+//     sphere.material.color.set(e);
+// })
+
+// gui.addColor(option, 'cubeColor').onChange( (e) => {
+//     box.material.color.set(e);
+// })
+
+// gui.add(option, 'speed', 0, 0.1);
+
+// gui.add(option, 'rotation', 10, 1000);
+
 var step = 5;
 sphere.castShadow = true;
 plane.receiveShadow = true;
@@ -39617,7 +39698,7 @@ renderer.setClearColor(0xFFEA00);
 
 //calling the animation in loop for the rotation
 renderer.setAnimationLoop(animate);
-},{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","dat.gui":"../node_modules/dat.gui/build/dat.gui.module.js","../../assets/nebula.jpg":"../assets/nebula.jpg","../../assets/star.jpg":"../assets/star.jpg"}],"../../../../.nvm/versions/node/v14.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","dat.gui":"../node_modules/dat.gui/build/dat.gui.module.js","../../assets/nebula.jpg":"../assets/nebula.jpg","../../assets/star.jpg":"../assets/star.jpg","../../assets/bg.jpeg":"../assets/bg.jpeg","../../assets/sky.jpeg":"../assets/sky.jpeg"}],"../../../../.nvm/versions/node/v14.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -39642,7 +39723,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63667" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53900" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
