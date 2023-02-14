@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as dat from 'dat.gui';
 import nebula from '../../assets/nebula.jpg'
 import star from '../../assets/star.jpg'
-import bg from '../../assets/bg.jpeg'
+import bg from '../../assets/bg.png'
 import sky from '../../assets/sky.jpeg'
 
 
@@ -20,7 +20,7 @@ const scene = new THREE.Scene();
 
 //add texture
 const textureLoader = new THREE.TextureLoader();
-scene.background = textureLoader.load(sky);
+// scene.background = textureLoader.load('https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/terrain_z1.jpg');
 
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 // scene.background = cubeTextureLoader.load([
@@ -42,29 +42,27 @@ const camera = new THREE.PerspectiveCamera(
 const orbit = new OrbitControls(camera, renderer.domElement);
 orbit.enableRotate = false;
 orbit.enableZoom = true;
-orbit.enablePan = false;
-orbit.screenSpacePanning = true;
-orbit.minDistance = 12;
+// orbit.enablePan = true;
+orbit.enableDamping = true; // optional - adds smooth damping to camera movement
+// orbit.screenSpacePanning = true;
+orbit.minDistance = 5;
 orbit.maxDistance = 32;
-orbit.target.set(0, 0, 0);
-orbit.update();
 //Helper for x, y and z axes
 const axesHelper = new THREE.AxesHelper(2);
-
 //adding axeshelper in scene
 // scene.add(axesHelper);
 
 const gridHelper = new THREE.GridHelper(30);
 // scene.add(gridHelper);
 //setting the position of camera
-camera.position.set(0, 10, 10);
+camera.position.set(0, 5, 0);
 // Set the camera position
 // camera.position.set(0, 300, 0);
 
 // Set the camera rotation
-camera.position.y = 10;
-camera.rotation.z = 90; 
+// camera.position.y = 10;
 //updating the camera every time the mouse is moved
+// orbit.target.set(0,5,0);
 orbit.update();
 
 //creating an CUBE
@@ -77,74 +75,77 @@ box.position.y = 7;
 
 
 //Plane object
-const planeGeometry = new THREE.PlaneGeometry(30, 30);
-const planeMaterial = new THREE.MeshLambertMaterial({ 
+const planeGeometry = new THREE.PlaneGeometry(55, 55);
+const planeMaterial = new THREE.MeshPhongMaterial({ 
     color: "white",
     //Plane from downside is not there so to add it, we add THREE.DoubleSide
     side: THREE.DoubleSide,
-    map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/5.jpg')
+    map: textureLoader.load('https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/terrain_z1.jpg')
 });
+const displacementMap = new THREE.TextureLoader().load(
+    'https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/depth_z1.jpg'
+)
+planeMaterial.displacementMap = displacementMap
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 // plane.position.set(-30, 0, 0);
 scene.add(plane);
 
-
-const planeGeometry2 = new THREE.PlaneGeometry(30, 30);
-const planeMaterial2 = new THREE.MeshLambertMaterial({ 
-    color: "white",
-    //Plane from downside is not there so to add it, we add THREE.DoubleSide
-    side: THREE.DoubleSide,
-    map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/6.jpg')
-});
-const plane2 = new THREE.Mesh(planeGeometry2, planeMaterial2);
-plane2.position.set(30, 0, 0);
-scene.add(plane2);
-
-
-const planeGeometry3 = new THREE.PlaneGeometry(30, 30);
-const planeMaterial3 = new THREE.MeshLambertMaterial({ 
-    color: "white",
-    //Plane from downside is not there so to add it, we add THREE.DoubleSide
-    side: THREE.DoubleSide,
-    map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/4.jpg')
-});
-const plane3 = new THREE.Mesh(planeGeometry3, planeMaterial3);
-plane3.position.set(-30, 0, 0);
-scene.add(plane3);
-
-const planeGeometry4 = new THREE.PlaneGeometry(30, 30);
-const planeMaterial4 = new THREE.MeshLambertMaterial({ 
-    color: "white",
-    //Plane from downside is not there so to add it, we add THREE.DoubleSide
-    side: THREE.DoubleSide,
-    map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/2.jpg')
-});
-const plane4 = new THREE.Mesh(planeGeometry4, planeMaterial4);
-plane4.position.set(0, 0, -30);
-scene.add(plane4);
+// const planeGeometry2 = new THREE.PlaneGeometry(30, 30);
+// const planeMaterial2 = new THREE.MeshLambertMaterial({ 
+//     color: "white",
+//     //Plane from downside is not there so to add it, we add THREE.DoubleSide
+//     side: THREE.DoubleSide,
+//     map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/6.jpg')
+// });
+// const plane2 = new THREE.Mesh(planeGeometry2, planeMaterial2);
+// plane2.position.set(30, 0, 0);
+// scene.add(plane2);
 
 
-const planeGeometry5 = new THREE.PlaneGeometry(30, 30);
-const planeMaterial5 = new THREE.MeshLambertMaterial({ 
-    color: "white",
-    //Plane from downside is not there so to add it, we add THREE.DoubleSide
-    side: THREE.DoubleSide,
-    map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/1.jpg')
-});
-const plane5 = new THREE.Mesh(planeGeometry5, planeMaterial5);
-plane5.position.set(-30, 0, -30);
-scene.add(plane5);
+// const planeGeometry3 = new THREE.PlaneGeometry(30, 30);
+// const planeMaterial3 = new THREE.MeshLambertMaterial({ 
+//     color: "white",
+//     //Plane from downside is not there so to add it, we add THREE.DoubleSide
+//     side: THREE.DoubleSide,
+//     map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/4.jpg')
+// });
+// const plane3 = new THREE.Mesh(planeGeometry3, planeMaterial3);
+// plane3.position.set(-30, 0, 0);
+// scene.add(plane3);
 
-const planeGeometry6 = new THREE.PlaneGeometry(30, 30);
-const planeMaterial6 = new THREE.MeshLambertMaterial({ 
-    color: "white",
-    //Plane from downside is not there so to add it, we add THREE.DoubleSide
-    side: THREE.DoubleSide,
-    map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/3.jpg')
-});
-const plane6 = new THREE.Mesh(planeGeometry6, planeMaterial6);
-plane6.position.set(30, 0, -30);
-scene.add(plane6);
+// const planeGeometry4 = new THREE.PlaneGeometry(30, 30);
+// const planeMaterial4 = new THREE.MeshLambertMaterial({ 
+//     color: "white",
+//     //Plane from downside is not there so to add it, we add THREE.DoubleSide
+//     side: THREE.DoubleSide,
+//     map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/2.jpg')
+// });
+// const plane4 = new THREE.Mesh(planeGeometry4, planeMaterial4);
+// plane4.position.set(0, 0, -30);
+// scene.add(plane4);
+
+
+// const planeGeometry5 = new THREE.PlaneGeometry(30, 30);
+// const planeMaterial5 = new THREE.MeshLambertMaterial({ 
+//     color: "white",
+//     //Plane from downside is not there so to add it, we add THREE.DoubleSide
+//     side: THREE.DoubleSide,
+//     map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/1.jpg')
+// });
+// const plane5 = new THREE.Mesh(planeGeometry5, planeMaterial5);
+// plane5.position.set(-30, 0, -30);
+// scene.add(plane5);
+
+// const planeGeometry6 = new THREE.PlaneGeometry(30, 30);
+// const planeMaterial6 = new THREE.MeshLambertMaterial({ 
+//     color: "white",
+//     //Plane from downside is not there so to add it, we add THREE.DoubleSide
+//     side: THREE.DoubleSide,
+//     map: textureLoader.load('https://www.azuki.com/garden/img/map/tiles/3.jpg')
+// });
+// const plane6 = new THREE.Mesh(planeGeometry6, planeMaterial6);
+// plane6.position.set(30, 0, -30);
+// scene.add(plane6);
 
 //SPHERE object
 const sphereGeometry = new THREE.SphereGeometry(4, 50, 50);
@@ -158,11 +159,11 @@ const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 sphere.position.set(-10, 4, 0);
 //Rotate the plane to grid alignment
 plane.rotation.x = -0.5 * Math.PI;
-plane2.rotation.x = -0.5 * Math.PI;
-plane3.rotation.x = -0.5 * Math.PI;
-plane4.rotation.x = -0.5 * Math.PI;
-plane5.rotation.x = -0.5 * Math.PI;
-plane6.rotation.x = -0.5 * Math.PI;
+// plane2.rotation.x = -0.5 * Math.PI;
+// plane3.rotation.x = -0.5 * Math.PI;
+// plane4.rotation.x = -0.5 * Math.PI;
+// plane5.rotation.x = -0.5 * Math.PI;
+// plane6.rotation.x = -0.5 * Math.PI;
 
 
 
@@ -177,7 +178,7 @@ directionalLight.position.set(-30, 50, 0);
 const dLightHelper = new THREE.DirectionalLightHelper(directionalLight);
 // scene.add(dLightHelper);
 //For customization and debugging we use dat.gui
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 const option = {
     sphereColor: '#ccc',
