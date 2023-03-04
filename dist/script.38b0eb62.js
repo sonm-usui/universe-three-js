@@ -39479,8 +39479,8 @@ exports.default = _default;
 module.exports = "/nebula.aa5f5ed0.jpg";
 },{}],"../assets/star.jpg":[function(require,module,exports) {
 module.exports = "/star.86f65ee6.jpg";
-},{}],"../assets/bg.png":[function(require,module,exports) {
-module.exports = "/bg.0ea5b990.png";
+},{}],"../assets/7.png":[function(require,module,exports) {
+module.exports = "/7.e1672e44.png";
 },{}],"../assets/sky.jpeg":[function(require,module,exports) {
 module.exports = "/sky.c763a4ea.jpeg";
 },{}],"JS/script.js":[function(require,module,exports) {
@@ -39491,7 +39491,7 @@ var _OrbitControls = require("three/examples/jsm/controls/OrbitControls");
 var dat = _interopRequireWildcard(require("dat.gui"));
 var _nebula = _interopRequireDefault(require("../../assets/nebula.jpg"));
 var _star = _interopRequireDefault(require("../../assets/star.jpg"));
-var _bg = _interopRequireDefault(require("../../assets/bg.png"));
+var _ = _interopRequireDefault(require("../../assets/7.png"));
 var _sky = _interopRequireDefault(require("../../assets/sky.jpeg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -39530,7 +39530,7 @@ orbit.enableZoom = true;
 orbit.enableDamping = true; // optional - adds smooth damping to camera movement
 // orbit.screenSpacePanning = true;
 orbit.minDistance = 5;
-orbit.maxDistance = 32;
+orbit.maxDistance = 35;
 //Helper for x, y and z axes
 var axesHelper = new THREE.AxesHelper(2);
 //adding axeshelper in scene
@@ -39565,7 +39565,7 @@ var planeMaterial = new THREE.MeshPhongMaterial({
   color: "white",
   //Plane from downside is not there so to add it, we add THREE.DoubleSide
   side: THREE.DoubleSide,
-  map: textureLoader.load('https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/terrain_z1.jpg')
+  map: textureLoader.load(_.default)
 });
 var displacementMap = new THREE.TextureLoader().load('https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/depth_z1.jpg');
 planeMaterial.displacementMap = displacementMap;
@@ -39706,7 +39706,7 @@ renderer.setClearColor(0xFFEA00);
 
 //calling the animation in loop for the rotation
 renderer.setAnimationLoop(animate);
-},{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","dat.gui":"../node_modules/dat.gui/build/dat.gui.module.js","../../assets/nebula.jpg":"../assets/nebula.jpg","../../assets/star.jpg":"../assets/star.jpg","../../assets/bg.png":"../assets/bg.png","../../assets/sky.jpeg":"../assets/sky.jpeg"}],"../../../../.nvm/versions/node/v14.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","dat.gui":"../node_modules/dat.gui/build/dat.gui.module.js","../../assets/nebula.jpg":"../assets/nebula.jpg","../../assets/star.jpg":"../assets/star.jpg","../../assets/7.png":"../assets/7.png","../../assets/sky.jpeg":"../assets/sky.jpeg"}],"../../../../.nvm/versions/node/v14.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -39731,7 +39731,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56774" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62064" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

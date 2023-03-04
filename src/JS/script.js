@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as dat from 'dat.gui';
 import nebula from '../../assets/nebula.jpg'
 import star from '../../assets/star.jpg'
-import bg from '../../assets/bg.png'
+import bg from '../../assets/7.png'
 import sky from '../../assets/sky.jpeg'
 
 
@@ -46,7 +46,7 @@ orbit.enableZoom = true;
 orbit.enableDamping = true; // optional - adds smooth damping to camera movement
 // orbit.screenSpacePanning = true;
 orbit.minDistance = 5;
-orbit.maxDistance = 32;
+orbit.maxDistance = 35;
 //Helper for x, y and z axes
 const axesHelper = new THREE.AxesHelper(2);
 //adding axeshelper in scene
@@ -80,7 +80,7 @@ const planeMaterial = new THREE.MeshPhongMaterial({
     color: "white",
     //Plane from downside is not there so to add it, we add THREE.DoubleSide
     side: THREE.DoubleSide,
-    map: textureLoader.load('https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/terrain_z1.jpg')
+    map: textureLoader.load(bg)
 });
 const displacementMap = new THREE.TextureLoader().load(
     'https://lolstatic-a.akamaihd.net/frontpage/apps/prod/universe-map/en_US/58c9aeb77ffc8ea44a3d723fd2e0ccc964f3444b/assets/assets/images/tiles/depth_z1.jpg'
